@@ -1,0 +1,2 @@
+# AngularStarterKit
+Angular base project
