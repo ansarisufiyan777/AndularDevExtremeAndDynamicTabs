@@ -1,29 +1,52 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { MaterialModules } from './material.modules';
-import { PositionDashboardComponent } from './position/position-dashboard/position-dashboard.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AppRoutingModule } from './app-routing.module';
+
+import { AppComponent } from './app.component';
+import { NgProgressModule } from '@ngx-progressbar/core';
+import { NgProgressRouterModule } from '@ngx-progressbar/router';
+import { NotfoundComponent } from './notfound/notfound.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 import { HttpClientModule } from '@angular/common/http';
+import { SharedModule } from './shared/shared.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PositionDashboardComponent } from './position-dashboard/position-dashboard.component';
+import { DxPivotGridModule,
+  DxPivotGridComponent,
+  DxChartModule,
+  DxChartComponent, 
+  DxTemplateModule,
+  DxPopupModule} from 'devextreme-angular';
+import { PositionGridComponent } from './position-grid/position-grid.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    PositionDashboardComponent
+    NotfoundComponent,
+    PositionDashboardComponent,
+    PositionGridComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    MaterialModules,
     BrowserAnimationsModule,
+    SharedModule,
+    AppRoutingModule,
+    NgProgressModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    NgProgressRouterModule,
+    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
+    
+    DxPivotGridModule,
+    DxChartModule,
+    DxTemplateModule,
+    DxPopupModule,
+
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
